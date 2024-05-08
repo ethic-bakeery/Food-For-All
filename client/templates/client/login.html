@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+           .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%; /* Adjusted width to fill the container */
+            opacity: 0.9;
+            margin-bottom: 10px; /* Added margin */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make it inline block to respect width and height */
+    }
+        h5 {
+            color: red;
+            text-align: center;
+        }
+
+        h3 {
+            color: red;
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .input-container {
+            display: -ms-flexbox;
+            /* IE10 */
+            display: flex;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border: 2px solid dodgerblue;
+        }
+
+        .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+        .register-btn {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .register-btn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<h3 style="color: dodgerblue;">Login Page</h3>
+
+
+
+<div class="container">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+    <form action="{% url 'client:login' %}" method="POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="input-container">
+            <input class="input-field" type="text" name="email" id="username" placeholder="Restaurant name"/>
+        </div>
+
+        <div class="input-container">
+            <input class="input-field" type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+
+        <!-- <button type="submit" class="btn" name="submit">Login</button> -->
+        <a class="btn" href="{% url 'client:login' %}">Login</a>
+        <a class="btn" href="{% url 'client:register' %}">Register</a>
+
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (username.trim() === "" || password.trim() === "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

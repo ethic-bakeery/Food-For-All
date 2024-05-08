@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        h5 {
+            color: red;
+            text-align: center;
+        }
+
+        h3 {
+            color: red;
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .input-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-field:focus {
+            border: 2px solid dodgerblue;
+        }
+
+        .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+        .register-btn {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .register-btn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<h5>Login</h5>
+
+{% for message in messages %}
+<h3>{{ message }}</h3>
+{% endfor %}
+
+<div class="container">
+    <form action="{% url 'login' %}" method="POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="input-container">
+            <input class="input-field" type="email" name="email" id="email" placeholder="Email address"/>
+        </div>
+
+        <div class="input-container">
+            <input class="input-field" type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+
+        <button type="submit" class="btn" name="submit">Login</button>
+    </form>
+
+    <button onclick="window.location.href='/register'" class="register-btn">Register</button>
+</div>
+
+<script>
+    function validateForm() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        if (email.trim() === "" || password.trim() === "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

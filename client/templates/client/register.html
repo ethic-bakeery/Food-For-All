@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .btn {
+        background-color: dodgerblue;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%; /* Adjusted width to fill the container */
+        opacity: 0.9;
+        margin-bottom: 10px; /* Added margin */
+        text-align: center; /* Center text */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Make it inline block to respect width and height */
+    }
+
+    .btn:hover {
+        opacity: 1;
+    }
+        h1 {
+            text-align: center;
+            color: dodgerblue;
+        }
+
+        h3 {
+            color: dodgerblue;
+            text-align: center;
+        }
+
+        h5 {
+            color: red;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .input-container {
+            display: -ms-flexbox;
+            /* IE10 */
+            display: flex;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            padding: 10px;
+            background: dodgerblue;
+            color: white;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border: 2px solid dodgerblue;
+        }
+
+        .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 48%; /* Adjusted width */
+            opacity: 0.9;
+            margin-bottom: 10px; /* Added margin */
+        }
+
+        .btn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Free Food For Everyone</h1>
+
+<div class="container">
+    <h3>Sign up below</h3>
+
+    {% for message in messages %}
+      <h5>{{message}}</h5>
+    {% endfor %}
+
+    <form action="{% url 'client:register' %}" method="POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="input-container">
+           
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="input-field" type="email" name="email" id="email" placeholder="Email address"/>
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" name="password2" id="password2" placeholder="Repeat Password"/>
+        </div>
+        <div>
+            <span id="passwordMessage" style="color: red;"></span> 
+        </div>
+        <!-- Added login button -->
+        <button type="submit" class="btn" name="submit">Register</button>
+        <a class="btn" href="{% url 'client:login' %}">Login</a>
+
+
+
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var password2 = document.getElementById("password2").value;
+
+        // Check if password meets complexity requirements
+        var passwordMessage = document.getElementById("passwordMessage");
+        var hasUppercase = /[A-Z]/.test(password);
+        var hasLowercase = /[a-z]/.test(password);
+        var hasNumber = /\d/.test(password);
+        var hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+
+        if (password.length < 8 || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecialChar) {
+            passwordMessage.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter.";
+            return false;
+        }
+
+        if (email == "" || password == "" || password2 == "") {
+            alert("Please fill in all fields");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

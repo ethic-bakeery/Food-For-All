@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Partnership Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .offer {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="offer">
+            <p>Partner with Food For All to help the needers and avoid food wastage!</p>
+            <p>And get ads worth INR 0. Valid for new restaurant partners in select cities.</p>
+        </div>
+        <div class="buttons">
+            <a href="{% url 'add_restaurant' %}" class="btn">Register your restaurant</a>
+            <a href="" class="btn">View your existing restaurant</a>
+        </div>
+    </div>
+</body>
+</html>
